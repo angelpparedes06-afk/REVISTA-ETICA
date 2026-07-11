@@ -95,9 +95,20 @@ function guardarComentario(db, { nombre, comentario }) {
    escucharComentariosEnTiempoReal(), más abajo.
    ===================================================================== */
 async function obtenerComentarios(db) {
+  // Usar query + orderBy sobre 'fecha' (minúscula). Mapeamos y
+  // normalizamos nombres de campo en caso de que existan documentos
+  // con campos en mayúsculas (p. ej. FECHA, NOMBRE, COMENTARIO).
   const q = query(collection(db, NOMBRE_COLECCION), orderBy("fecha", "desc"));
   const snapshot = await getDocs(q);
-  return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+  return snapshot.docs.map((doc) => {
+    const d = doc.data();
+    return {
+      id: doc.id,
+      nombre: d.nombre ?? d.NOMBRE ?? "Anónimo",
+      comentario: d.comentario ?? d.COMENTARIO ?? "",
+      fecha: d.fecha ?? d.FECHA ?? null,
+    };
+  });
 }
 
 async function leerComentarios(db) {
@@ -119,7 +130,15 @@ function escucharComentariosEnTiempoReal(db, callback, onError) {
   const unsubscribe = onSnapshot(
     q,
     (snapshot) => {
-      const comentarios = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+      const comentarios = snapshot.docs.map((doc) => {
+        const d = doc.data();
+        return {
+          id: doc.id,
+          nombre: d.nombre ?? d.NOMBRE ?? "Anónimo",
+          comentario: d.comentario ?? d.COMENTARIO ?? "",
+          fecha: d.fecha ?? d.FECHA ?? null,
+        };
+      });
       callback(comentarios);
     },
     (error) => {
@@ -152,7 +171,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const estadoLista     = document.getElementById("reflexionesEstado");
 
   const MAX_CARACTERES = 500;
-  const idsYaMostrados = new Set(); // para animar solo las tarjetas nuevas
+  // No usar cachés locales: siempre renderizamos directamente desde
+  // Firestore (no arrays/sets persistentes para almacenar comentarios).
 
   /* --- Botón "Escribir reflexión": lleva directo al formulario --- */
   if (btnEscribir && form) {
@@ -203,9 +223,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* --- Crea el elemento HTML de una tarjeta de comentario --- */
-  function crearTarjeta({ id, nombre, comentario, fecha }, esNueva) {
+  function crearTarjeta({ id, nombre, comentario, fecha }) {
     const card = document.createElement("article");
-    card.className = "comment-card" + (esNueva ? " comment-card--enter" : "");
+    card.className = "comment-card";
     card.dataset.id = id;
 
     const head = document.createElement("div");
@@ -231,21 +251,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* --- Vuelve a pintar la lista completa a partir de los datos de Firestore --- */
   function renderizarComentarios(comentarios) {
+    // Limpiar siempre antes de volver a pintar
     lista.innerHTML = "";
 
-    if (comentarios.length === 0) {
+    if (!comentarios || comentarios.length === 0) {
       const vacio = document.createElement("p");
       vacio.className = "reflect__empty";
       vacio.textContent = "Aún no hay reflexiones. Sé la primera o el primero en compartir la tuya.";
       lista.appendChild(vacio);
-      idsYaMostrados.clear();
       return;
     }
 
+    // Renderizar todos los documentos recibidos desde Firestore
     comentarios.forEach((c) => {
-      const esNueva = !idsYaMostrados.has(c.id);
-      idsYaMostrados.add(c.id);
-      lista.appendChild(crearTarjeta(c, esNueva));
+      lista.appendChild(crearTarjeta(c));
     });
   }
 
