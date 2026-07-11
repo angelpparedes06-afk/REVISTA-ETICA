@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0a0a09">
+<title>Ética Digital y Humana · Memoria, Tecnología y Responsabilidad Social</title>
+<meta name="description" content="Un recorrido documental interactivo por el Museo Memoria y Tolerancia: memoria, tecnología y responsabilidad social.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,900;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Precarga de la imagen LCP (fondo del hero) para mejorar el rendimiento -->
+<link rel="preload" as="image" href="hero-museo-fachada.jpg" fetchpriority="high">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Enlace de salto para navegación por teclado / lectores de pantalla -->
+<a class="skip-link" href="#main">Saltar al contenido del recorrido</a>
+
+<!-- ============ INDICADOR DE PROGRESO ============ -->
+<div class="progress-track" role="progressbar" aria-label="Progreso de lectura del recorrido" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progressTrack">
+  <div class="progress-fill" id="progressFill"></div>
+</div>
+
+<!-- ============ NAVBAR ============ -->
+<header class="navbar" id="navbar">
+  <div class="navbar__inner">
+    <button type="button" class="navbar__mark" id="navHome" aria-label="Volver al inicio del recorrido">
+      <span class="glyph-mark" aria-hidden="true">✦</span>
+      <span class="navbar__mark-text">Memoria&nbsp;&amp;&nbsp;Tolerancia</span>
+    </button>
+    <button type="button" class="navbar__toggle" id="navToggle" aria-expanded="false" aria-controls="roomDrawer" aria-haspopup="true">
+      <span class="navbar__toggle-label">Salas</span>
+      <span class="navbar__toggle-bars" aria-hidden="true"><i></i><i></i><i></i></span>
+    </button>
+  </div>
+</header>
+
+<!-- ============ DIRECTORIO DE SALAS (drawer) ============ -->
+<nav class="drawer" id="roomDrawer" aria-hidden="true" aria-label="Directorio de salas del recorrido">
+  <div class="drawer__head">
+    <span class="drawer__eyebrow">Directorio del recorrido</span>
+    <button type="button" class="drawer__close" id="drawerClose" aria-label="Cerrar directorio de salas">✕</button>
+  </div>
+  <ol class="drawer__list">
+    <li><a href="#hero" data-room="00"><span aria-hidden="true">00</span>Portada</a></li>
+    <li><a href="#memorial" data-room="01"><span aria-hidden="true">01</span>Memorial de los Niños</a></li>
+    <li><a href="#partido-nazi" data-room="02"><span aria-hidden="true">02</span>El Partido Nazi</a></li>
+    <li><a href="#inicio-terror" data-room="03"><span aria-hidden="true">03</span>Inicio del Terror</a></li>
+    <li><a href="#holocausto" data-room="04"><span aria-hidden="true">04</span>Holocausto</a></li>
+    <li><a href="#campos" data-room="05"><span aria-hidden="true">05</span>Campos de Concentración y Exterminio</a></li>
+    <li><a href="#quema-libros" data-room="06"><span aria-hidden="true">06</span>Quema de Libros</a></li>
+    <li><a href="#europa-occidental" data-room="07"><span aria-hidden="true">07</span>Europa Occidental</a></li>
+    <li><a href="#prensa-mexicana" data-room="08"><span aria-hidden="true">08</span>Prensa Mexicana</a></li>
+    <li><a href="#comandos-moviles" data-room="09"><span aria-hidden="true">09</span>Comandos Móviles de Asesinato</a></li>
+    <li><a href="#deshumanizacion" data-room="10"><span aria-hidden="true">10</span>Deshumanización</a></li>
+    <li><a href="#eufemismos" data-room="11"><span aria-hidden="true">11</span>Eufemismos</a></li>
+    <li><a href="#saqueos" data-room="12"><span aria-hidden="true">12</span>Saqueos</a></li>
+    <li><a href="#proceso-asesinato" data-room="13"><span aria-hidden="true">13</span>Proceso de Asesinato</a></li>
+    <li><a href="#solucion-final" data-room="14"><span aria-hidden="true">14</span>Solución Final</a></li>
+    <li><a href="#vestimenta" data-room="15"><span aria-hidden="true">15</span>Vestimenta</a></li>
+    <li><a href="#visita" data-room="16"><span aria-hidden="true">16</span>Información de la visita</a></li>
+    <li><a href="#comparte-reflexion" data-room="17"><span aria-hidden="true">17</span>Comparte tu reflexión</a></li>
+  </ol>
+</nav>
+<div class="drawer__scrim" id="drawerScrim" aria-hidden="true"></div>
+
+<main id="main">
+
+  <!-- ============ 00 · HERO / PORTADA ============ -->
+  <section class="hero" id="hero" aria-label="Portada">
+    <div class="hero__bg" id="heroBg">
+      <img src="hero-museo-fachada.jpg" alt="Fachada del Museo Memoria y Tolerancia, Ciudad de México" class="hero__img hero__img--a" width="384" height="512" fetchpriority="high" decoding="async">
+      <img src="hero-tolerancia-retratos.jpg" alt="Muro de retratos bajo la palabra Tolerancia" class="hero__img hero__img--b" width="512" height="384" loading="eager" decoding="async">
+    </div>
+    <div class="hero__scrim"></div>
+    <div class="hero__content">
+      <p class="eyebrow eyebrow--light">Un recorrido documental interactivo</p>
+      <h1 class="hero__title">Fotorrevista Ética<br>Digital y Humana</h1>
+      <p class="hero__subtitle">Memoria, tecnología y responsabilidad social</p>
+      <div class="hero__divider" aria-hidden="true"></div>
+      <p class="hero__credits">Integrantes&nbsp;·&nbsp;González Colín Daniel&nbsp;·&nbsp;Marín Hernández Fernando&nbsp;·&nbsp;Peña Paredes Angel</p>
+      <button type="button" class="btn btn--ghost" id="startTour">Comenzar recorrido</button>
+    </div>
+    <div class="hero__scroll-cue" aria-hidden="true"><span></span>Desplázate</div>
+  </section>
+
+  <!-- ============ GALERÍA DE ENTRADA ============ -->
+  <section class="entry-gallery" aria-label="Galería fotográfica de la visita al museo">
+    <figure class="entry-gallery__item reveal">
+      <img src="hero-grupo-estudiantes.jpg" alt="Grupo frente a la escultura de la entrada del museo" width="384" height="512" loading="lazy" decoding="async">
+      <figcaption>Entrada del Museo Memoria y Tolerancia, Ciudad de México</figcaption>
+    </figure>
+    <figure class="entry-gallery__item reveal">
+      <img src="hero-discursos-odio.jpg" alt="Sala de Discursos de Odio del museo" width="384" height="512" loading="lazy" decoding="async">
+      <figcaption>Sala «Discursos de Odio» — los discursos de odio producen dolor, rechazo, violencia y pérdida de vidas humanas</figcaption>
+    </figure>
+  </section>
+
+  <!-- ============ LÍNEA DEL TIEMPO ============ -->
+  <section class="timeline-section" aria-label="Línea del tiempo del régimen nazi">
+    <p class="eyebrow">Cronología del recorrido</p>
+    <h2 class="section-title section-title--center">De la propaganda al exterminio</h2>
+    <div class="timeline">
+      <ol class="timeline__list">
+        <li class="timeline__item reveal"><span class="timeline__year">1923</span><p>Golpe de estado fallido de Hitler; es arrestado y escribe <em>Mi lucha</em> en prisión.</p></li>
+        <li class="timeline__item reveal"><span class="timeline__year">1933</span><p>Hitler es nombrado canciller. Se abre el primer campo de concentración en Dachau; quema de libros y boicot a comercios judíos.</p></li>
+        <li class="timeline__item reveal"><span class="timeline__year">1934</span><p>Muerte de Hindenburg. Hitler se proclama Führer y dictador absoluto.</p></li>
+        <li class="timeline__item reveal"><span class="timeline__year">1941</span><p>Invasión del frente oriental; comienzan los Einsatzgruppen, comandos móviles de asesinato.</p></li>
+        <li class="timeline__item reveal"><span class="timeline__year">1942</span><p>Conferencia de Wannsee: se planea el exterminio de once millones de personas.</p></li>
+        <li class="timeline__item reveal"><span class="timeline__year">1943</span><p>La prensa mexicana reporta «los convoyes de la muerte» rumbo a un destino desconocido.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ 01 · MEMORIAL DE LOS NIÑOS (cinemático) ============ -->
+  <section class="cinematic" id="memorial" aria-label="Sala 01 — Memorial de los Niños">
+    <div class="cinematic__bg parallax" data-speed="0.2">
+      <img src="memorial-ninos-mariposas.jpg" alt="Instalación de mariposas doradas suspendidas en espiral hacia una luz central, Memorial de los Niños" width="768" height="1024" loading="lazy" decoding="async">
+    </div>
+    <div class="cinematic__scrim"></div>
+    <div class="cinematic__content reveal">
+      <p class="eyebrow eyebrow--light">Sala 01</p>
+      <h2 class="cinematic__title">Memorial<br>de los Niños</h2>
+      <p class="cinematic__subtitle">Holocausto durante la Segunda Guerra Mundial</p>
+    </div>
+  </section>
+
+  <!-- ============ 02 · PARTIDO NAZI ============ -->
+  <section class="room" id="partido-nazi" aria-label="Sala 02 — El Partido Nazi">
+    <div class="room__media reveal">
+      <img src="partido-nazi.jpg" alt="Panel del museo «El Partido Nazi» junto a un recorte de prensa titulado Hitler es ya dictador" width="768" height="576" loading="lazy" decoding="async">
+    </div>
+    <div class="room__text reveal">
+      <p class="eyebrow">Sala 02</p>
+      <h2 class="section-title">El Partido Nazi</h2>
+      <p>La consolidación del Partido Nazi se basó en un nacionalismo radical y la promesa de restaurar el orgullo alemán tras la crisis. Utilizando una cuidadosa estrategia que combinó la propaganda masiva, la movilización popular y la violencia sistemática, el régimen logró erosionar las instituciones democráticas desde adentro hasta otorgarle a Adolf Hitler el control absoluto del Estado.</p>
+    </div>
+  </section>
+
+  <!-- ============ 03 · INICIO DEL TERROR ============ -->
+  <section class="room room--reverse" id="inicio-terror" aria-label="Sala 03 — Inicio del Terror">
+    <div class="room__media reveal">
+      <img src="inicio-del-terror.jpg" alt="Vitrina del museo «Inicio del Terror» con insignias y medallas del régimen nazi" width="1210" height="908" loading="lazy" decoding="async">
+    </div>
+    <div class="room__text reveal">
+      <p class="eyebrow">Sala 03</p>
+      <h2 class="section-title">Inicio del Terror</h2>
+      <p>Tras asumir el control total, el régimen instauró un estado policial basado en la persecución inmediata de la disidencia. Con la apertura de los primeros campos de concentración como Dachau y la creación de cuerpos especializados como la Gestapo y las SS, el miedo se convirtió en la principal herramienta de control social, anulando cualquier derecho civil o político.</p>
+    </div>
+  </section>
+
+  <!-- ============ 04 · HOLOCAUSTO ============ -->
+  <section class="room" id="holocausto" aria-label="Sala 04 — Holocausto">
+    <div class="room__media reveal">
+      <img src="holocausto.jpg" alt="Panel del museo «¿Qué es el Holocausto?»" width="605" height="807" loading="lazy" decoding="async">
+    </div>
+    <div class="room__text reveal">
+      <p class="eyebrow">Sala 04</p>
+      <h2 class="section-title">Holocausto</h2>
+      <p>Lo que comenzó con la exclusión política culminó en un proyecto de exterminio sin precedentes. Durante doce años, se ejecutó una política de asesinato masivo que buscaba la eliminación de cualquier colectivo considerado "indeseable" por el régimen. Judíos, homosexuales, eslavos y opositores fueron víctimas de una persecución avalada por el Estado que redefinió los límites del horror global.</p>
+    </div>
+  </section>
+
+  <!-- ============ 05 · CAMPOS DE CONCENTRACIÓN Y EXTERMINIO ============ -->
+  <section class="room room--reverse" id="campos" aria-label="Sala 05 — Campos de Concentración y Exterminio">
+    <div class="room__media reveal">
+      <img src="campos-concentracion-exterminio.jpg" alt="Panel y fotografías históricas de los campos de concentración y exterminio" width="908" height="1210" loading="lazy" decoding="async">
+    </div>
+    <div class="room__text reveal">
+      <p class="eyebrow">Sala 05</p>
+      <h2 class="section-title">Campos de Concentración<br>y Exterminio</h2>
+      <p>El verdadero abismo de este sistema radicó en la deshumanización y la industrialización del asesinato masivo. Los campos de exterminio fueron diseñados con la única y fría finalidad de erradicar vidas humanas de la manera más eficaz posible. A través de cámaras de gas, fusilamientos, hambrunas y un agotamiento sistemático, el régimen convirtió la violencia masiva en un proceso de producción industrial.</p>
+    </div>
+  </section>
+
+  <!-- ============ 06 · QUEMA DE LIBROS ============ -->
+  <section class="room" id="quema-libros" aria-label="Sala 06 — Quema de Libros">
+    <div class="room__media reveal">
+      <img src="quema-de-libros.jpg" alt="Panel del museo sobre la Quema de Libros" width="807" height="605" loading="lazy" decoding="async">
+    </div>
+    <div class="room__text reveal">
+      <p class="eyebrow">Sala 06</p>
+      <h2 class="section-title">Quema de Libros</h2>
+      <p>El fanatismo ideológico no solo persiguió a los individuos, sino también a su legado. Cientos de bibliotecas fueron saqueadas para destruir las obras de mentes brillantes como Albert Einstein o Sigmund Freud, mientras los museos eran despojados del arte de creadores vanguardistas. Al borrar la literatura y el arte considerados "enemigos", el régimen intentó erradicar el espíritu crítico y reescribir la memoria de una nación.</p>
+    </div>
+  </section>
+
+  <blockquote class="pull-quote reveal">
+    <p>«Ahí donde se queman libros, al final se queman también seres humanos.»</p>
+    <cite>Heine, poeta alemán de origen judío — frase escrita un siglo antes; en 1933, la Alemania nazi convirtió su profecía en hecho.</cite>
+  </blockquote>
+
+  <!-- ============ 07 · EUROPA OCCIDENTAL ============ -->
+  <section class="room room--reverse" id="europa-occidental" aria-label="Sala 07 — Europa Occidental">
+    <div class="room__media reveal">
+      <img src="europa-occidental.jpg" alt="Panel del museo sobre Europa Occidental con fotografía de soldados frente a la Torre Eiffel" width="605" height="807" loading="lazy" decoding="async">
+    </div>
+    <div class="room__text reveal">
+      <p class="eyebrow">Sala 07</p>
+      <h2 class="section-title">Europa Occidental</h2>
+      <p>La expansión del régimen hacia Europa occidental transformó radicalmente la vida de las naciones ocupadas. Aunque los métodos de control variaron respecto al frente oriental debido a las teorías raciales del nazismo, la población judía sufrió la misma pérdida sistemática de derechos civiles. La imposición de la estrella amarilla y la exclusión de los espacios públicos marcaron el inicio de una segregación oficial e implacable.</p>
+    </div>
+  </section>
+
+  <!-- ============ 08 · PRENSA MEXICANA (cinemático) ============ -->
+  <section class="cinematic" id="prensa-mexicana" aria-label="Sala 08 — Prensa Mexicana">
+    <div class="cinematic__bg parallax" data-speed="0.2">
+      <img src="prensa-mexicana.jpg" alt="Recorte enmarcado del periódico El Universal, 1 de abril de 1943, titulado Los Convoyes de la Muerte" width="908" height="1210" loading="lazy" decoding="async">
+    </div>
+    <div class="cinematic__scrim cinematic__scrim--soft"></div>
+    <div class="cinematic__content reveal">
+      <p class="eyebrow eyebrow--light">Sala 08</p>
+      <h2 class="cinematic__title cinematic__title--sm">Prensa Mexicana</h2>
+      <p class="cinematic__subtitle">1 de abril de 1943</p>
+      <p class="cinematic__caption">«Los convoyes de la muerte. Se reveló un horrible sistema que consiste en llevar a judíos franceses a sitios de donde nada vuelve a saberse de ellos. Figuraban en él tres mil judíos de diversas clases sociales, entre niños, adultos y ancianos. Todo lo que sabían era que se les llevaba "al este".»</p>
+      <p class="cinematic__source">Extractos del periódico El Universal, tal como los reporta la exhibición del museo.</p>
+    </div>
+  </section>
+
+  <!-- ============ 09 · COMANDOS MÓVILES DE ASESINATO ============ -->
+  <section class="room" id="comandos-moviles" aria-label="Sala 09 — Comandos Móviles de Asesinato">
+    <div class="room__media reveal">
+      <img src="comandos-moviles-asesinato.jpg" alt="Panel del museo sobre los Einsatzgruppen, comandos móviles de asesinato" width="807" height="605" loading="lazy" decoding="async">
+    </div>
+    <div class="room__text reveal">
+      <p class="eyebrow">Sala 09</p>
+      <h2 class="section-title">Comandos Móviles<br>de Asesinato</h2>
+      <p>La invasión del frente oriental en 1941 desató una modalidad de exterminio directa y brutal a través de los Einsatzgruppen. Estos escuadrones móviles de ejecución avanzaban junto al ejército para exterminar de forma inmediata a comunidades enteras. Sin el uso de complejos industriales de reclusión, más de un millón de personas fueron ejecutadas de cara a cara y arrojadas a fosas comunes a las afueras de los pueblos conquistados.</p>
+    </div>
+  </section>
+
+  <!-- ============ 10 · DESHUMANIZACIÓN ============ -->
+  <section class="room room--reverse" id="deshumanizacion" aria-label="Sala 10 — Deshumanización">
+    <div class="room__media reveal">
+      <img src="deshumanizacion.jpg" alt="Panel del museo sobre la Deshumanización con fotografía histórica de prisioneros" width="605" height="807" loading="lazy" decoding="async">
+    </div>
+    <div class="room__text reveal">
+      <p class="eyebrow">Sala 10</p>
+      <h2 class="section-title">Deshumanización</h2>
+      <p>Los registros fotográficos de campos como Wöbbelin capturan los efectos más devastadores del abandono institucionalizado. El régimen no solo buscó el exterminio físico, sino el desmantelamiento previo de la dignidad. Al tratarse la muerte de manera tan impersonal y desapegada, el sistema totalitario pretendió borrar el último rastro de individualidad de millones de seres humanos.</p>
+    </div>
+  </section>
+
+  <!-- ============ 11 · EUFEMISMOS ============ -->
+  <section class="room room--wide" id="eufemismos" aria-label="Sala 11 — Eufemismos">
+    <div class="room__media reveal">
+      <img src="eufemismos.jpg" alt="Panel del museo con la tabla de eufemismos utilizados en los campos de concentración y exterminio" width="384" height="512" loading="lazy" decoding="async">
+    </div>
+    <div class="room__text reveal">
+      <p class="eyebrow">Sala 11</p>
+      <h2 class="section-title">Eufemismos</h2>
+      <p>El control del régimen totalitario también se ejerció mediante la distorsión absoluta del lenguaje. A través de un elaborado sistema de eufemismos burocráticos, palabras cotidianas o médicas como "desinfección", "regadera" o "trato especial" fueron camufladas para encubrir la ejecución de crímenes masivos. Esta manipulación lingüística buscaba normalizar la crueldad y ocultar la verdad ante los ojos del mundo.</p>
+
+      <table class="euphemism-table">
+        <caption class="sr-only">Eufemismos utilizados en los campos de concentración y exterminio, y su significado real</caption>
+        <thead>
+          <tr><th scope="col">Eufemismo</th><th scope="col">Significado</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><em>Arbeit Macht Frei</em> — El trabajo libera</td><td>Frase que se encontraba sobre la entrada de Auschwitz y otros campos</td></tr>
+          <tr><td><em>Selektion</em> — Selección</td><td>Elección de quién vive y quién muere</td></tr>
+          <tr><td><em>Sonderbehandlung</em> o SB — Trato especial</td><td>Asesinato a la llegada</td></tr>
+          <tr><td><em>Desinfizieren</em> — Desinfección</td><td>Muerte mediante gas</td></tr>
+          <tr><td>Regadera</td><td>Cámaras de gas</td></tr>
+          <tr><td><em>Nacht und Nebel</em> — Noche y neblina</td><td>Código para referirse a prisioneros que serían aniquilados sin dejar rastro</td></tr>
+          <tr><td><em>Experimente</em> — Experimentos</td><td>Experimentos médicos realizados en personas</td></tr>
+          <tr><td><em>Präzision</em> — Precisión</td><td>Establecer cuántos, cómo, dónde y cuándo serían asesinados</td></tr>
+          <tr><td><em>Verbesserung</em> — Mejoramiento</td><td>Gaseo</td></tr>
+          <tr><td>Liquidación</td><td>Asesinato</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ 12 · SAQUEOS ============ -->
+  <section class="room room--reverse" id="saqueos" aria-label="Sala 12 — Saqueos">
+    <div class="room__media reveal">
+      <img src="saqueos.jpg" alt="Panel del museo «El negocio de la muerte» sobre los saqueos en Auschwitz-Birkenau" width="605" height="807" loading="lazy" decoding="async">
+    </div>
+    <div class="room__text reveal">
+      <p class="eyebrow">Sala 12</p>
+      <h2 class="section-title">Saqueos</h2>
+      <p>El exterminio masivo funcionó también como una gigantesca operación financiera de saqueo estatal. A través de sectores especializados en los campos, como el almacén Kanada en Auschwitz, el régimen confiscaba y clasificaba sistemáticamente cada objeto de valor de las víctimas para enviarlo a Alemania. Ropa, joyas y recursos financieros fueron absorbidos por las arcas del Estado, transformando el genocidio en una fuente de enriquecimiento material.</p>
+      <div class="info-card reveal">
+        <p class="info-card__title">El negocio de la muerte</p>
+        <p>Mientras las víctimas morían en las cámaras de gas de Auschwitz-Birkenau, los nazis saqueaban sus pertenencias. Todos los objetos confiscados pasaban a ser propiedad del <em>Reich</em>. Estos objetos se almacenaban en un sector del campo que llegó a ser conocido como <em>Kanada</em>. Ahí se clasificaban las pertenencias de los prisioneros para ser enviadas a Alemania: ropa, zapatos, dinero, lentes, joyas, relojes, etc. No bastándoles con el despojo material, los nazis también lucraron con los cuerpos de las víctimas; utilizaron el cabello humano para usarlo como relleno de almohadas y reciclaron las piezas de oro dentales. Este sistema aseguraba que nada se desperdiciara, salvo la vida de millones de seres humanos.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 13 · PROCESO DE ASESINATO ============ -->
+  <section class="room" id="proceso-asesinato" aria-label="Sala 13 — Proceso de Asesinato">
+    <div class="room__media reveal">
+      <img src="proceso-de-asesinato.jpg" alt="Panel del museo sobre el proceso de asesinato con fotografías históricas" width="605" height="807" loading="lazy" decoding="async">
+    </div>
+    <div class="room__text reveal">
+      <p class="eyebrow">Sala 13</p>
+      <h2 class="section-title">Proceso de Asesinato</h2>
+      <p>La perversión de la maquinaria concentracionaria alcanzó su límite al forzar a los propios prisioneros a participar en la logística del horror. Los llamados Sonderkommandos eran obligados a extraer los restos de valor y trasladar los cuerpos hacia los hornos tras cada ejecución. Esta manipulación extrema no solo buscaba la eliminación física de un grupo, sino romper cualquier barrera de moralidad y empatía dentro del campo.</p>
+    </div>
+  </section>
+
+  <!-- ============ 14 · SOLUCIÓN FINAL ============ -->
+  <section class="room room--reverse" id="solucion-final" aria-label="Sala 14 — Solución Final">
+    <div class="room__media reveal">
+      <img src="solucion-final.jpg" alt="Sala inmersiva del museo sobre la Conferencia de Wannsee y la Solución Final" width="807" height="605" loading="lazy" decoding="async">
+    </div>
+    <div class="room__text reveal">
+      <p class="eyebrow">Sala 14</p>
+      <h2 class="section-title">Solución Final</h2>
+      <p>En enero de 1942, la Conferencia de Wannsee marcó el punto donde el odio ideológico se transformó en un frío plan administrativo. Altos funcionarios del régimen se reunieron con el único propósito de coordinar la logística para el exterminio planeado de 11 millones de personas a escala continental. Esta reunión convirtió el asesinato masivo en un proyecto gubernamental minuciosamente organizado y estructurado.</p>
+    </div>
+  </section>
+
+  <!-- ============ 15 · VESTIMENTA (cinemático de cierre) ============ -->
+  <section class="cinematic" id="vestimenta" aria-label="Sala 15 — Vestimenta">
+    <div class="cinematic__bg parallax" data-speed="0.2">
+      <img src="vestimenta.jpg" alt="Uniforme a rayas y gorra utilizados por las personas en los campos de concentración y exterminio, exhibidos en el museo" width="1210" height="1613" loading="lazy" decoding="async">
+    </div>
+    <div class="cinematic__scrim"></div>
+    <div class="cinematic__content reveal">
+      <p class="eyebrow eyebrow--light">Sala 15</p>
+      <h2 class="cinematic__title cinematic__title--sm">Vestimenta</h2>
+      <p class="cinematic__subtitle">Prendas utilizadas por las personas en los campos de concentración y exterminio</p>
+    </div>
+  </section>
+
+  <!-- ============ 16 · INFORMACIÓN DE LA VISITA ============ -->
+  <section class="visit" id="visita" aria-label="Sala 16 — Información de la visita">
+    <p class="eyebrow">Planea tu visita</p>
+    <h2 class="section-title section-title--center">Museo Memoria y Tolerancia</h2>
+    <p class="visit__intro">Este recorrido está inspirado en la exhibición permanente del Museo Memoria y Tolerancia, un espacio dedicado a la reflexión sobre la memoria histórica, la ética y la responsabilidad social frente a la intolerancia.</p>
+    <div class="visit__cards">
+      <div class="info-card info-card--compact reveal">
+        <p class="info-card__title">Dirección</p>
+        <p>Av. Juárez 8, Colonia Centro, Cuauhtémoc, 06010, Ciudad de México, CDMX</p>
+      </div>
+      <div class="info-card info-card--compact reveal">
+        <p class="info-card__title">Teléfono</p>
+        <p><a href="tel:+525551305555">55 5130 5555</a></p>
+      </div>
+      <div class="info-card info-card--compact reveal">
+        <p class="info-card__title">El mensaje del recorrido</p>
+        <p>Los discursos de odio producen dolor, rechazo, violencia y pérdida de vidas humanas.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       17 · COMPARTE TU REFLEXIÓN (nuevo · integración con Firebase)
+       Esta sección es 100% aditiva: reutiliza las clases de diseño
+       existentes (.eyebrow, .section-title, .btn, .info-card) y solo
+       incorpora clases nuevas con el prefijo .reflect__ para sus
+       piezas específicas (QR, formulario, tarjetas de comentarios).
+       La lógica vive en firebase.js (cargado como módulo aparte,
+       sin modificar script.js).
+  ============================================================ -->
+  <section class="visit reflect" id="comparte-reflexion" aria-label="Sala 17 — Comparte tu reflexión">
+    <p class="eyebrow">Sala 17</p>
+    <h2 class="section-title section-title--center">Comparte tu reflexión</h2>
+    <p class="visit__intro">La memoria histórica permanece viva cuando compartimos lo que aprendemos.</p>
+
+    <!-- Código QR: al escanearlo, abre esta misma página en #comparte-reflexion -->
+    <figure class="reflect__qr reveal">
+      <img src="qr-reflexion.png"
+           alt="Código QR temporal — al escanearlo con tu celular, abrirá este recorrido en la sección Comparte tu reflexión"
+           width="260" height="260" loading="lazy" decoding="async">
+      <figcaption class="reflect__qr-caption">
+        Escanea este código con tu celular para abrir el recorrido y dejar tu reflexión al instante.
+      </figcaption>
+    </figure>
+
+    <div class="reflect__cta">
+      <button type="button" class="btn btn--ghost" id="btnEscribirReflexion">Escribir reflexión</button>
+    </div>
+
+    <!-- ---------------- FORMULARIO ---------------- -->
+    <form class="reflect__form" id="formReflexion" novalidate>
+      <p class="reflect__form-help">Tu nombre es opcional; lo que escribas es lo que más nos importa.</p>
+
+      <div class="reflect__field">
+        <label for="inputNombre">Nombre <span>(opcional)</span></label>
+        <input type="text" id="inputNombre" name="nombre" maxlength="60" autocomplete="name" placeholder="Anónimo">
+      </div>
+
+      <div class="reflect__field">
+        <label for="inputComentario">Tu reflexión</label>
+        <textarea id="inputComentario" name="comentario" rows="4" maxlength="500" required
+          aria-describedby="contadorCaracteres errorComentario"
+          placeholder="¿Qué te llevas de este recorrido?"></textarea>
+        <div class="reflect__field-meta">
+          <span class="reflect__error" id="errorComentario" role="alert"></span>
+          <span class="reflect__counter" id="contadorCaracteres">0 / 500</span>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn--ghost" id="btnPublicar">
+        <span id="btnPublicarLabel">Publicar</span>
+      </button>
+
+      <p class="reflect__status" id="statusMensaje" role="status" aria-live="polite"></p>
+    </form>
+
+    <!-- ---------------- REFLEXIONES DE NUESTROS VISITANTES ---------------- -->
+    <div class="reflect__comments">
+      <h3 class="reflect__comments-title">Reflexiones de nuestros visitantes</h3>
+      <div class="reflect__list" id="listaReflexiones" aria-live="polite">
+        <p class="reflect__empty" id="reflexionesEstado">Cargando reflexiones…</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <div class="site-footer__brand">
+      <span class="glyph-mark" aria-hidden="true">✦</span>
+      <p>Fotorrevista Ética Digital y Humana<br><span>Memoria, Tecnología y Responsabilidad Social</span></p>
+    </div>
+    <div class="site-footer__meta">
+      <p class="site-footer__label">Integrantes</p>
+      <p>González Colín Daniel</p>
+      <p>Marín Hernández Fernando</p>
+      <p>Peña Paredes Angel</p>
+    </div>
+    <div class="site-footer__meta">
+      <p class="site-footer__label">Fuente</p>
+      <p>Museo Memoria y Tolerancia</p>
+      <p>Av. Juárez 8, Centro, CDMX</p>
+      <p><a href="tel:+525551305555">55 5130 5555</a></p>
+    </div>
+  </div>
+  <p class="site-footer__legal">Recorrido documental construido con fines educativos a partir de la visita al Museo Memoria y Tolerancia.</p>
+</footer>
+
+<!-- ============ BOTÓN VOLVER ARRIBA ============ -->
+<button type="button" class="to-top" id="toTop" aria-label="Volver arriba">↑</button>
+
+<script src="script.js" defer></script>
+<!-- Módulo de Firebase: gestiona el Libro de Reflexiones (sección #comparte-reflexion).
+     Se carga por separado, como type="module", y no modifica ni depende de script.js. -->
+<script src="firebase.js" type="module"></script>
+</body>
+</html>
