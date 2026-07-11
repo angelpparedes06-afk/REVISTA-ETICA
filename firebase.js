@@ -36,27 +36,21 @@ import {
 /* =====================================================================
    1) CONFIGURACIÓN DE FIREBASE
    ---------------------------------------------------------------------
-   Reemplaza cada valor "TU_..." con los datos reales de tu proyecto.
-   Los encuentras en:
-   Firebase Console → ⚙️ Configuración del proyecto → General →
-   "Tus apps" → SDK setup and configuration → Config.
-
-   ⚠️ No se han escrito datos falsos ni de ejemplo: los siguientes
-   marcadores DEBEN sustituirse antes de que el Libro de Reflexiones
-   funcione. Mientras tanto, la interfaz mostrará un aviso amigable
-   en vez de fallar en silencio (ver el bloque try/catch más abajo).
+   Si algún día cambias de proyecto o de dominio, modifica únicamente
+   este bloque. El resto del flujo de comentarios sigue funcionando igual.
    ===================================================================== */
 const firebaseConfig = {
-  apiKey: "TU_API_KEY",                       // ej. "AIzaSyD-XXXXXXXXXXXXXXXXXXXXXXXXXXXX"
-  authDomain: "TU_AUTH_DOMAIN",                // ej. "tu-proyecto.firebaseapp.com"
-  projectId: "TU_PROJECT_ID",                  // ej. "tu-proyecto"
-  storageBucket: "TU_STORAGE_BUCKET",          // ej. "tu-proyecto.appspot.com"
-  messagingSenderId: "TU_MESSAGING_SENDER_ID", // ej. "123456789012"
-  appId: "TU_APP_ID",                          // ej. "1:123456789012:web:abcd1234efgh5678"
+  apiKey: "AIzaSyA2Z2M4kKAVmEmI29s8xMpqAofY8q1Skio",
+  authDomain: "revista-etica.firebaseapp.com",
+  projectId: "revista-etica",
+  storageBucket: "revista-etica.firebasestorage.app",
+  messagingSenderId: "74570177462",
+  appId: "1:74570177462:web:861837df55ea01b9cd7f17",
+  measurementId: "G-X311MHLE9S"
 };
 
 /* Nombre de la colección de Firestore donde se guardan las reflexiones.
-   Ver la explicación completa al final de este archivo. */
+   Si en el futuro cambias el nombre de la colección, modifica aquí. */
 const NOMBRE_COLECCION = "comentarios";
 
 /* =====================================================================
@@ -100,10 +94,14 @@ function guardarComentario(db, { nombre, comentario }) {
    en la consola del navegador. La actualización EN VIVO la hace
    escucharComentariosEnTiempoReal(), más abajo.
    ===================================================================== */
-async function leerComentarios(db) {
+async function obtenerComentarios(db) {
   const q = query(collection(db, NOMBRE_COLECCION), orderBy("fecha", "desc"));
   const snapshot = await getDocs(q);
   return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+}
+
+async function leerComentarios(db) {
+  return obtenerComentarios(db);
 }
 
 /* =====================================================================
